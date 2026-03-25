@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Star } from 'lucide-react';
+import { Flower } from 'lucide-react';
 
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
@@ -7,7 +7,7 @@ export default function CustomCursor() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Only run on devices with a fine pointer (like a mouse)
+    // Only run on devices with a fine pointer
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const updatePosition = (e) => {
@@ -16,7 +16,6 @@ export default function CustomCursor() {
     };
 
     const handleMouseOver = (e) => {
-      // Check if we're hovering over a clickable element
       const target = e.target;
       const computedStyle = window.getComputedStyle(target);
       if (
@@ -30,9 +29,7 @@ export default function CustomCursor() {
       }
     };
     
-    const handleMouseLeave = () => {
-      setIsVisible(false);
-    };
+    const handleMouseLeave = () => setIsVisible(false);
 
     window.addEventListener('mousemove', updatePosition);
     window.addEventListener('mouseover', handleMouseOver);
@@ -47,35 +44,30 @@ export default function CustomCursor() {
     };
   }, [isVisible]);
 
-  if (!isVisible && typeof window !== 'undefined' && window.innerWidth > 768) {
-    return null; // hide when mouse leaves the window or on mobile
-  }
-
-  // Hide on touch devices or small screens natively via CSS, but this helps logic
+  if (!isVisible && typeof window !== 'undefined' && window.innerWidth > 768) return null;
   if (typeof window !== 'undefined' && window.innerWidth <= 768) return null;
 
   return (
-    <>
-      <div 
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '16px',
-          height: '16px',
-          color: 'var(--accent-color)',
-          transform: `translate(${position.x - 8}px, ${position.y - 8}px) ${isHovering ? 'rotate(180deg) scale(1.2)' : 'rotate(0deg) scale(1)'}`,
-          pointerEvents: 'none',
-          zIndex: 99999,
-          transition: 'transform 0.1s ease-out',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-        className="custom-cursor-dot"
-      >
-        <Star fill="currentColor" size={16} strokeWidth={1} />
-      </div>
-    </>
+    <div 
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '32px',
+        height: '32px',
+        transform: `translate(${position.x - 16}px, ${position.y - 16}px) ${isHovering ? 'rotate(15deg) scale(1.3)' : 'rotate(0deg) scale(1)'}`,
+        pointerEvents: 'none',
+        zIndex: 99999,
+        transition: 'transform 0.15s cubic-bezier(0.16, 1, 0.3, 1)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '28px',
+        opacity: isHovering ? 1 : 0.9
+      }}
+      className="custom-cursor-dot"
+    >
+      🌸
+    </div>
   );
 }

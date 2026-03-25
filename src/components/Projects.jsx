@@ -4,7 +4,7 @@ import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 
 function ProjectCard({ project }) {
   const [currentIdx, setCurrentIdx] = useState(0);
-  const images = project.images || [project.image]; // fallback
+  const images = project.images || [project.image]; 
 
   const nextImage = (e) => {
     e.stopPropagation();
@@ -17,31 +17,34 @@ function ProjectCard({ project }) {
   };
 
   return (
-    <div className="glass" style={{
-      overflow: 'hidden',
+    <div className="glass animate-fade-in" style={{
       display: 'flex',
       flexDirection: 'column',
+      overflow: 'hidden',
       transition: 'transform 0.3s ease, box-shadow 0.3s ease',
       cursor: 'pointer'
     }}
     onMouseOver={(e) => {
-      e.currentTarget.style.transform = 'translateY(-10px)';
-      e.currentTarget.style.boxShadow = 'var(--glass-shadow)';
-      e.currentTarget.style.border = '1px solid var(--accent-glow)';
+      e.currentTarget.style.transform = 'translateY(-6px)';
+      e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+      e.currentTarget.style.background = 'var(--glass-hover-bg)';
+      const img = e.currentTarget.querySelector('.proj-img');
+      if (img) img.style.transform = 'scale(1.03)';
     }}
     onMouseOut={(e) => {
       e.currentTarget.style.transform = 'translateY(0)';
       e.currentTarget.style.boxShadow = 'var(--glass-shadow)';
-      e.currentTarget.style.border = '1px solid var(--glass-border)';
+      e.currentTarget.style.background = 'var(--glass-bg)';
+      const img = e.currentTarget.querySelector('.proj-img');
+      if (img) img.style.transform = 'scale(1)';
     }}
     >
-      <div style={{ height: '220px', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ height: '240px', position: 'relative', overflow: 'hidden' }}>
         <img 
+          className="proj-img"
           src={images[currentIdx]} 
           alt={`${project.title} - view ${currentIdx + 1}`}
           style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
-          onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-          onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
         />
         
         {images.length > 1 && (
@@ -50,32 +53,31 @@ function ProjectCard({ project }) {
               onClick={prevImage}
               style={{
                 position: 'absolute', left: '0.5rem', top: '50%', transform: 'translateY(-50%)',
-                background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.8)', border: 'none',
                 width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer', color: '#000', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                transition: 'background 0.2s'
+                cursor: 'pointer', color: '#0f172a', zIndex: 10,
+                transition: 'background 0.2s', borderRadius: '50%', boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
               }}
-              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)'}
-              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.7)'}
+              onMouseOver={(e) => e.currentTarget.style.background = '#fff'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.8)'}
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={18} />
             </button>
             <button 
               onClick={nextImage}
               style={{
                 position: 'absolute', right: '0.5rem', top: '50%', transform: 'translateY(-50%)',
-                background: 'rgba(255, 255, 255, 0.7)', border: 'none', borderRadius: '50%',
+                background: 'rgba(255, 255, 255, 0.8)', border: 'none',
                 width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                cursor: 'pointer', color: '#000', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                transition: 'background 0.2s'
+                cursor: 'pointer', color: '#0f172a', zIndex: 10,
+                transition: 'background 0.2s', borderRadius: '50%', boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
               }}
-              onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)'}
-              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.7)'}
+              onMouseOver={(e) => e.currentTarget.style.background = '#fff'}
+              onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.8)'}
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={18} />
             </button>
 
-            {/* Pagination Dots */}
             <div style={{
               position: 'absolute', bottom: '0.75rem', left: '0', right: '0', 
               display: 'flex', justifyContent: 'center', gap: '0.4rem', zIndex: 10
@@ -83,10 +85,9 @@ function ProjectCard({ project }) {
               {images.map((_, idx) => (
                 <div key={idx} style={{
                   width: '6px', height: '6px', borderRadius: '50%',
-                  background: idx === currentIdx ? 'var(--accent-color)' : 'rgba(255,255,255,0.8)',
-                  boxShadow: '0 0 2px rgba(0,0,0,0.2)',
-                  transition: 'background 0.2s ease',
-                  transform: idx === currentIdx ? 'scale(1.2)' : 'scale(1)'
+                  background: idx === currentIdx ? '#fff' : 'rgba(255,255,255,0.5)',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
+                  transition: 'background 0.2s ease, transform 0.2s'
                 }} />
               ))}
             </div>
@@ -94,17 +95,20 @@ function ProjectCard({ project }) {
         )}
       </div>
       
-      <div style={{ padding: '1.5rem', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-        <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{project.title}</h3>
-        <p style={{ marginBottom: '1.5rem', flexGrow: 1 }}>{project.description}</p>
+      <div style={{ padding: '1.5rem 2rem', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+        <h3 style={{ fontSize: '1.4rem', marginBottom: '0.75rem' }}>{project.title}</h3>
+        
+        <p style={{ marginBottom: '1.5rem', flexGrow: 1, fontSize: '1rem', color: 'var(--text-secondary)' }}>{project.description}</p>
         
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
           {project.tags.map(tag => (
             <span key={tag} style={{
-              fontSize: '0.75rem',
+              fontSize: '0.8rem',
+              fontWeight: '500',
               padding: '0.35rem 0.85rem',
-              background: 'var(--glass-hover-bg)',
-              borderRadius: '9999px',
+              background: 'var(--bg-color)',
+              border: '1px solid var(--glass-border)',
+              borderRadius: '8px',
               color: 'var(--text-primary)'
             }}>
               {tag}
@@ -119,7 +123,8 @@ function ProjectCard({ project }) {
           color: 'var(--accent-color)',
           textDecoration: 'none',
           fontWeight: '600',
-          marginTop: 'auto'
+          marginTop: 'auto',
+          fontSize: '0.95rem'
         }}>
           View Project <ExternalLink size={16} />
         </a>
@@ -130,17 +135,16 @@ function ProjectCard({ project }) {
 
 export default function Projects() {
   return (
-    <section id="projects" style={{ padding: '6rem 0' }}>
+    <section id="projects" style={{ padding: '8rem 0', borderBottom: '1px solid var(--glass-border)' }}>
       <div className="container">
-        <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', textAlign: 'center', color: 'var(--text-primary)' }}>
           Featured <span className="gradient-text">Work</span>
         </h2>
         
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2rem',
-          padding: '2rem 0'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '2.5rem'
         }}>
           {portfolioData.projects.map((project) => (
             <ProjectCard key={project.id} project={project} />

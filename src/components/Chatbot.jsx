@@ -42,7 +42,7 @@ export default function Chatbot() {
     }
 
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -66,151 +66,167 @@ export default function Chatbot() {
     <>
       <button 
         onClick={() => setIsOpen(true)}
-        className="glass animate-float"
+        className="animate-fade-in glass"
         style={{
           position: 'fixed',
-          bottom: '2rem',
-          right: '2rem',
-          width: '64px',
-          height: '64px',
-          borderRadius: '50%',
+          bottom: '2.5rem',
+          right: '2.5rem',
+          height: '56px',
+          padding: '0 1.5rem',
+          borderRadius: '28px',
           display: isOpen ? 'none' : 'flex',
           alignItems: 'center',
+          gap: '0.75rem',
           justifyContent: 'center',
           color: '#fff',
-          border: '1px solid var(--accent-glow)',
           cursor: 'pointer',
           zIndex: 100,
-          background: 'var(--accent-gradient)'
+          background: 'var(--accent-gradient)',
+          border: 'none',
+          boxShadow: 'var(--glass-shadow)',
+          transition: 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
         }}
+        onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05) translateY(-4px)'}
+        onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1) translateY(0)'}
       >
-        <MessageSquare size={28} />
+        <MessageSquare size={24} />
+        <span style={{ fontWeight: '600', fontSize: '1rem', letterSpacing: '-0.01em', whiteSpace: 'nowrap' }}>
+          Chat with Uyen
+        </span>
       </button>
 
       {isOpen && (
         <div className="glass animate-fade-in" style={{
           position: 'fixed',
-          bottom: '2rem',
-          right: '2rem',
+          bottom: '2.5rem',
+          right: '2.5rem',
           width: '360px',
-          height: '550px',
+          height: '600px',
+          maxHeight: '85vh',
           display: 'flex',
           flexDirection: 'column',
           zIndex: 100,
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
-          background: 'rgba(10, 10, 10, 0.95)',
-          border: '1px solid rgba(139, 92, 246, 0.2)'
+          borderRadius: '24px',
+          overflow: 'hidden',
+          boxShadow: 'var(--glass-shadow)',
         }}>
           <div style={{
-            padding: '1.25rem',
+            padding: '1.25rem 1.5rem',
             borderBottom: '1px solid var(--glass-border)',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             background: 'var(--glass-bg)',
-            borderTopLeftRadius: '16px',
-            borderTopRightRadius: '16px'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 'bold' }}>
-              <Bot size={24} color="var(--accent-color)" />
-              {portfolioData.personal.name}'s AI
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: '600', fontSize: '1.05rem', color: 'var(--text-primary)' }}>
+              <div style={{ background: 'var(--accent-gradient)', padding: '6px', borderRadius: '10px', display: 'flex' }}>
+                <Bot size={20} color="#fff" />
+              </div>
+              {portfolioData.personal.name.split(' ')[0]}'s Assistant
             </div>
             <button 
               onClick={() => setIsOpen(false)}
-              style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', transition: 'color 0.2s' }}
-              onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
-              onMouseOut={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+              style={{ background: 'var(--bg-secondary)', border: '1px solid var(--glass-border)', borderRadius: '50%', width: '32px', height: '32px', color: 'var(--text-secondary)', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              onMouseOver={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.background = 'var(--glass-border)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; e.currentTarget.style.background = 'var(--bg-secondary)'; }}
             >
-              <X size={20} />
+              <X size={16} />
             </button>
           </div>
 
           <div style={{
             flexGrow: 1,
             overflowY: 'auto',
-            padding: '1.25rem',
+            padding: '1.5rem',
             display: 'flex',
             flexDirection: 'column',
-            gap: '1.25rem'
+            gap: '1.25rem',
+            background: 'var(--bg-secondary)'
           }}>
             {messages.map((msg, idx) => (
-              <div key={idx} style={{
+              <div key={idx} className="animate-fade-in" style={{
                 display: 'flex',
                 gap: '0.75rem',
-                alignItems: 'flex-start',
+                alignItems: 'flex-end',
                 flexDirection: msg.role === 'user' ? 'row-reverse' : 'row'
               }}>
                 <div style={{
-                  width: '36px', height: '36px', borderRadius: '50%',
-                  background: msg.role === 'user' ? 'var(--glass-bg)' : 'var(--accent-glow)',
+                  width: '32px', height: '32px', borderRadius: '50%',
+                  background: msg.role === 'user' ? 'var(--text-primary)' : 'var(--accent-color)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0
+                  flexShrink: 0, color: 'white'
                 }}>
-                  {msg.role === 'user' ? <User size={18} /> : <Bot size={18} />}
+                  {msg.role === 'user' ? <User size={16} /> : <Bot size={16} />}
                 </div>
                 <div style={{
                   padding: '0.875rem 1.125rem',
                   borderRadius: '16px',
-                  borderTopRightRadius: msg.role === 'user' ? '4px' : '16px',
-                  borderTopLeftRadius: msg.role === 'assistant' ? '4px' : '16px',
-                  background: msg.role === 'user' ? 'var(--accent-gradient)' : 'var(--glass-bg)',
-                  maxWidth: '75%',
+                  borderBottomRightRadius: msg.role === 'user' ? '4px' : '16px',
+                  borderBottomLeftRadius: msg.role === 'assistant' ? '4px' : '16px',
+                  background: msg.role === 'user' ? 'var(--bg-color)' : 'var(--glass-bg)',
+                  border: '1px solid var(--glass-border)',
+                  maxWidth: '80%',
                   fontSize: '0.95rem',
                   lineHeight: '1.5',
-                  color: '#fff'
+                  color: 'var(--text-primary)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.02)'
                 }}>
                   {msg.content}
                 </div>
               </div>
             ))}
             {isLoading && (
-              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-                <Bot size={18} color="var(--text-secondary)" />
-                <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>thinking...</span>
+              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', paddingLeft: '2.5rem' }}>
+                <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: '500' }}>Thinking...</span>
               </div>
             )}
             <div ref={messagesEndRef} />
           </div>
 
           <form onSubmit={handleSend} style={{
-            padding: '1.25rem',
+            padding: '1rem',
             borderTop: '1px solid var(--glass-border)',
             display: 'flex',
             gap: '0.75rem',
             background: 'var(--glass-bg)',
-            borderBottomLeftRadius: '16px',
-            borderBottomRightRadius: '16px'
           }}>
             <input 
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask me anything..."
+              placeholder="Type your message..."
               style={{
                 flexGrow: 1,
-                background: 'rgba(255, 255, 255, 0.05)',
+                background: 'var(--bg-secondary)',
                 border: '1px solid var(--glass-border)',
-                borderRadius: '8px',
-                padding: '0.875rem',
+                borderRadius: '12px',
+                padding: '0.875rem 1rem',
                 color: 'var(--text-primary)',
                 outline: 'none',
-                fontSize: '0.95rem'
+                fontSize: '0.95rem',
+                transition: 'all 0.2s',
+                boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.02)'
               }}
-              onFocus={(e) => e.target.style.border = '1px solid var(--accent-color)'}
-              onBlur={(e) => e.target.style.border = '1px solid var(--glass-border)'}
+              onFocus={(e) => { e.target.style.borderColor = 'var(--accent-color)'; e.target.style.boxShadow = '0 0 0 2px rgba(59, 130, 246, 0.1)'; }}
+              onBlur={(e) => { e.target.style.borderColor = 'var(--glass-border)'; e.target.style.boxShadow = 'inset 0 1px 3px rgba(0,0,0,0.02)'; }}
             />
             <button type="submit" disabled={!input.trim()} style={{
-              background: 'var(--accent-gradient)',
+              background: 'var(--accent-color)',
               border: 'none',
-              borderRadius: '8px',
+              borderRadius: '12px',
               width: '48px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#fff',
               cursor: input.trim() ? 'pointer' : 'not-allowed',
-              opacity: input.trim() ? 1 : 0.5
-            }}>
+              opacity: input.trim() ? 1 : 0.5,
+              transition: 'all 0.2s',
+              boxShadow: input.trim() ? '0 4px 12px rgba(59, 130, 246, 0.3)' : 'none'
+            }}
+            onMouseOver={(e) => { if(input.trim()) e.currentTarget.style.filter = 'brightness(1.1)'; }}
+            onMouseOut={(e) => { if(input.trim()) e.currentTarget.style.filter = 'brightness(1)'; }}
+            >
               <Send size={20} />
             </button>
           </form>
