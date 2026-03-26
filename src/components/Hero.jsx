@@ -22,7 +22,7 @@ export default function Hero() {
           {/* Text Content */}
           <div className="animate-fade-in" style={{ maxWidth: '600px' }}>
             <div className="glass-pill" style={{ display: 'inline-flex', marginBottom: '2rem', color: 'var(--text-primary)', border: '1px solid var(--glass-border)' }}>
-              👋 Welcome to my portfolio
+              🌸 Welcome to Uyen's world
             </div>
             
             <h1 style={{ 
@@ -32,8 +32,8 @@ export default function Hero() {
               marginBottom: '1.5rem',
               color: 'var(--text-primary)'
             }}>
-              Hi, I'm {portfolioData.personal.name.split(' ')[0]} <br/>
-              <span className="gradient-text">{portfolioData.personal.role}</span>
+              <span className="gradient-text">Uyen's world</span> <br/>
+              <span style={{ fontSize: '0.5em', fontWeight: '500', color: 'var(--text-secondary)' }}>{portfolioData.personal.role}</span>
             </h1>
             
             <p style={{ 

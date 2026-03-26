@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send, MessageSquare } from 'lucide-react';
 import { portfolioData } from '../data/portfolioData';
 
 export default function Contact() {
@@ -7,16 +7,34 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${portfolioData.personal.email}`, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        e.target.reset();
+        setTimeout(() => setSubmitted(false), 5000);
+      }
+    } catch (error) {
+      console.error('Submission error:', error);
+      alert('There was an error sending your message. Please try again.');
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 1500);
+    }
   };
 
   return (
@@ -36,14 +54,18 @@ export default function Contact() {
       }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           <div className="glass" style={{ padding: '2rem', display: 'flex', alignItems: 'center', gap: '1.5rem', borderRadius: '16px' }}>
-            <div style={{ 
+            <a href={`mailto:${portfolioData.personal.email}`} style={{ 
               width: '56px', height: '56px', borderRadius: '14px', 
               background: 'var(--bg-color)', border: '1px solid var(--glass-border)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: 'var(--accent-color)', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.05)'
-            }}>
+              color: 'var(--accent-color)', flexShrink: 0, boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+              transition: 'all 0.2s ease', textDecoration: 'none'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.borderColor = 'var(--accent-color)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.borderColor = 'var(--glass-border)'; }}
+            >
               <Mail size={24} />
-            </div>
+            </a>
             <div>
               <h3 style={{ fontSize: '1.25rem', margin: '0 0 0.25rem', color: 'var(--text-primary)' }}>Email Me</h3>
               <a href={`mailto:${portfolioData.personal.email}`} style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s', fontSize: '1.05rem' }} onMouseOver={(e) => e.target.style.color = 'var(--accent-color)'} onMouseOut={(e) => e.target.style.color = 'var(--text-secondary)'}>
@@ -70,15 +92,20 @@ export default function Contact() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="glass" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', borderRadius: '20px' }}>
+        <form 
+          onSubmit={handleSubmit}
+          className="glass" 
+          style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', borderRadius: '20px' }}
+        >
+          <input type="hidden" name="_subject" value="New Portfolio Message!" />
+          
           <div>
             <label htmlFor="name" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)', fontWeight: '500' }}>Name</label>
             <input 
               type="text" 
               id="name"
+              name="name"
               required
-              value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
               style={{
                 width: '100%', padding: '1rem', borderRadius: '12px',
                 background: 'var(--bg-color)', border: '1px solid var(--glass-border)',
@@ -94,9 +121,8 @@ export default function Contact() {
             <input 
               type="email" 
               id="email"
+              name="email"
               required
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
               style={{
                 width: '100%', padding: '1rem', borderRadius: '12px',
                 background: 'var(--bg-color)', border: '1px solid var(--glass-border)',
@@ -111,10 +137,9 @@ export default function Contact() {
             <label htmlFor="message" style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-primary)', fontWeight: '500' }}>Message</label>
             <textarea 
               id="message"
+              name="message"
               required
               rows="5"
-              value={formData.message}
-              onChange={(e) => setFormData({...formData, message: e.target.value})}
               style={{
                 width: '100%', padding: '1rem', borderRadius: '12px',
                 background: 'var(--bg-color)', border: '1px solid var(--glass-border)',
@@ -131,16 +156,17 @@ export default function Contact() {
             disabled={isSubmitting}
             style={{ 
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', 
-              marginTop: '1rem', opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? 'not-allowed' : 'pointer',
-              border: 'none', padding: '1rem 2rem', borderRadius: '12px', background: 'var(--accent-color)',
-              color: '#fff', fontSize: '1.05rem', fontWeight: 'bold', transition: 'background 0.2s',
-              boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)'
+              marginTop: '1rem', cursor: isSubmitting ? 'not-allowed' : 'pointer',
+              border: 'none', padding: '1rem 2rem', borderRadius: '12px', background: 'var(--accent-gradient)',
+              color: '#fff', fontSize: '1.05rem', fontWeight: 'bold', transition: 'all 0.2s',
+              boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
+              opacity: isSubmitting ? 0.7 : 1
             }}
             onMouseOver={(e) => { if (!isSubmitting) e.currentTarget.style.filter = 'brightness(1.1)'; }}
             onMouseOut={(e) => { if (!isSubmitting) e.currentTarget.style.filter = 'brightness(1)'; }}
           >
-            {isSubmitting ? 'Sending...' : (submitted ? 'Message Sent!' : 'Send Message')}
-            {!(isSubmitting || submitted) && <Send size={18} />}
+            {isSubmitting ? 'Sending...' : (submitted ? 'Message Sent! ✨' : 'Send Message')}
+            {(!isSubmitting && !submitted) && <Send size={18} />}
           </button>
         </form>
       </div>

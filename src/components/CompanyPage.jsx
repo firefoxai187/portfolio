@@ -269,6 +269,17 @@ export default function CompanyPage() {
     );
   }
 
+  // Group projects by brand if it's Annam Group
+  const isAnnamGroup = slug === 'annam-group';
+  const brandGroups = isAnnamGroup
+    ? company.projects.reduce((groups, project) => {
+        const brand = project.brand || 'Other';
+        if (!groups[brand]) groups[brand] = [];
+        groups[brand].push(project);
+        return groups;
+      }, {})
+    : null;
+
   return (
     <div style={{ paddingTop: '120px', paddingBottom: '6rem', minHeight: '100vh' }}>
       <div className="container" style={{ maxWidth: '900px' }}>
@@ -296,13 +307,14 @@ export default function CompanyPage() {
         </button>
 
         {/* Company Header */}
-        <div className="animate-fade-in" style={{ marginBottom: '3rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+        <div className="animate-fade-in" style={{ marginBottom: '4rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
             <h1 style={{
-              fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+              fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
               color: 'var(--text-primary)',
               margin: 0,
-              lineHeight: 1.2
+              lineHeight: 1.1,
+              fontWeight: 800
             }}>
               {company.company}
             </h1>
@@ -318,13 +330,14 @@ export default function CompanyPage() {
                 textDecoration: 'none',
                 color: 'var(--accent-color)',
                 fontSize: '0.85rem',
-                padding: '0.3rem 0.8rem',
-                transition: 'transform 0.2s ease'
+                padding: '0.4rem 1rem',
+                transition: 'all 0.2s ease',
+                border: '1px solid var(--glass-border)'
               }}
-              onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-              onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.background = 'var(--bg-secondary)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.background = 'transparent'; }}
             >
-              <ExternalLink size={13} /> Website
+              <ExternalLink size={13} /> Official Website
             </a>
           </div>
 
@@ -332,72 +345,123 @@ export default function CompanyPage() {
             display: 'flex',
             alignItems: 'center',
             gap: '2rem',
-            marginBottom: '1rem',
+            marginBottom: '2rem',
             flexWrap: 'wrap'
           }}>
             <span style={{
               color: 'var(--accent-color)',
               fontWeight: '600',
-              fontSize: '1.1rem'
+              fontSize: '1.2rem',
+              letterSpacing: '-0.01em'
             }}>
               {company.role}
             </span>
             <span style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '0.4rem',
+              gap: '0.5rem',
               color: 'var(--text-secondary)',
-              fontSize: '0.95rem'
+              fontSize: '1rem',
+              padding: '0.3rem 0.8rem',
+              borderRadius: '8px',
+              background: 'var(--bg-secondary)'
             }}>
-              <Calendar size={14} />
+              <Calendar size={15} />
               {company.period}
             </span>
           </div>
 
-          <p style={{
-            color: 'var(--text-secondary)',
-            lineHeight: '1.8',
-            fontSize: '1.05rem',
-            margin: 0,
-            maxWidth: '700px'
-          }}>
-            {company.description}
-          </p>
+          <div className="glass" style={{ padding: '2rem', borderRadius: '20px', border: '1px solid var(--glass-border)' }}>
+            <p style={{
+              color: 'var(--text-primary)',
+              lineHeight: '1.85',
+              fontSize: '1.1rem',
+              margin: 0,
+              opacity: 0.9
+            }}>
+              {company.description}
+            </p>
+          </div>
         </div>
 
         {/* Projects Section */}
-        <div style={{ marginBottom: '2rem' }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            color: 'var(--text-primary)',
-            marginBottom: '2rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem'
-          }}>
-            Projects
-            <span style={{
-              fontSize: '0.85rem',
-              fontWeight: '500',
-              color: 'var(--accent-color)',
-              background: 'var(--bg-secondary)',
-              border: '1px solid var(--glass-border)',
-              borderRadius: '9999px',
-              padding: '0.2rem 0.65rem'
-            }}>
-              {company.projects.length}
-            </span>
-          </h2>
+        <div>
+          {isAnnamGroup ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+              {Object.entries(brandGroups).map(([brand, projects], bIdx) => (
+                <div key={brand} className="animate-fade-in" style={{ animationDelay: `${bIdx * 0.1}s` }}>
+                  <div style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '1.5rem', 
+                    marginBottom: '2.5rem',
+                    position: 'relative'
+                  }}>
+                    <h2 style={{ 
+                      fontSize: '1.8rem', 
+                      margin: 0, 
+                      color: 'var(--text-primary)',
+                      fontWeight: 700,
+                      zIndex: 1
+                    }}>
+                      {brand}
+                    </h2>
+                    <div style={{ 
+                      flex: 1, 
+                      height: '1px', 
+                      background: 'linear-gradient(to right, var(--glass-border), transparent)',
+                    }} />
+                    <span style={{
+                      fontSize: '0.8rem',
+                      fontWeight: '600',
+                      color: 'var(--text-secondary)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em'
+                    }}>
+                      {projects.length} Project{projects.length > 1 ? 's' : ''}
+                    </span>
+                  </div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+                    {projects.map((project, index) => (
+                      <ProjectCard key={project.id} project={project} index={index} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              <h2 style={{
+                fontSize: '1.8rem',
+                color: 'var(--text-primary)',
+                marginBottom: '2.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem',
+                fontWeight: 700
+              }}>
+                Projects
+                <span style={{
+                  fontSize: '0.9rem',
+                  fontWeight: '600',
+                  color: 'var(--accent-color)',
+                  background: 'var(--bg-secondary)',
+                  border: '1px solid var(--glass-border)',
+                  borderRadius: '9999px',
+                  padding: '0.25rem 0.8rem'
+                }}>
+                  {company.projects.length}
+                </span>
+              </h2>
 
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2rem'
-          }}>
-            {company.projects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
-            ))}
-          </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+                {company.projects.map((project, index) => (
+                  <ProjectCard key={project.id} project={project} index={index} />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

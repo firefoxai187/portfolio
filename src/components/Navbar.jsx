@@ -52,7 +52,7 @@ export default function Navbar({ isDark, toggleTheme, toggleRain }) {
           onMouseOver={(e) => e.currentTarget.style.opacity = '0.8'}
           onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
         >
-          {portfolioData.personal.name}
+          🌸 Uyen's world
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem', fontSize: '0.95rem', fontWeight: '500' }}>
           <a href="#about" onClick={(e) => handleNavClick(e, '#about')} style={{ color: 'var(--text-secondary)', textDecoration: 'none', transition: 'color 0.2s' }}

@@ -8,7 +8,7 @@ export const portfolioData = {
     phone: "+84 388 922 392",
     location: "Ho Chi Minh City",
     github: "",
-    linkedin: "https://linkedin.com/in/uyen-ngo",
+    linkedin: "https://www.linkedin.com/in/uyenpunnn?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
     resumeUrl: "#"
   },
 
@@ -25,87 +25,124 @@ export const portfolioData = {
       projects: [
         {
           id: "annam-1",
-          title: "Mathieu Teisseire — Social Media & Flavour Masters",
-          description: "Full social media management across Facebook, Instagram, and TikTok. Led the Flavour Masters bartending competition for 3 consecutive years, coordinating with international bartenders for 5+ masterclasses and guest shifts monthly.",
+          brand: "Mathieu Teisseire",
+          title: "Social Media & Flavour Masters",
+          description: "End-to-end brand management for Mathieu Teisseire in Vietnam. Conceptualized and executed 360-degree marketing strategies including social media, grand-scale bartending competitions, and high-impact PR campaigns.",
           highlights: [
-            "Social Media Management across Facebook, Instagram, TikTok",
-            "Flavour Masters competition — 3 consecutive years (2024, 2025, 2026 TBC)",
-            "5+ Masterclasses & Guest Shifts per month with international bartenders",
-            "PR coverage in TheDotMagazine, VnExpress, HTV, Thanh Niên"
+            "360° Social Media Management: Framework conceptualization & agency coordination across FB, IG, TikTok",
+            "Flavour Masters Competition Lead (2024-2026): Managing whole-of-competition logistics, branding, and judging",
+            "International Advocacy: Coordinating 5+ Masterclasses/month with global brand ambassadors",
+            "Strategic PR: Secured high-profile coverage in VNExpress, TheDotMagazine, HTV, and Thanh Niên"
           ],
-          metrics: "3 years • 60+ masterclasses",
-          images: ["/Anam 1.jpg"],
+          metrics: "3 years • Top 2 Global Cocktails",
+          images: [
+            "/mathieu-teisseire/flavour-masters/MT 1.jpg",
+            "/mathieu-teisseire/flavour-masters/MT 2.jpg",
+            "/mathieu-teisseire/flavour-masters/MT 3.jpg",
+            "/mathieu-teisseire/flavour-masters/MT 4.jpg"
+          ],
           links: [
             { label: "Mathieu Teisseire Vietnam", url: "https://www.facebook.com/mathieuteisseirevietnam" },
             { label: "Flavour Masters 2024 PR", url: "https://thedotmagazine.com/like-a-butterfly-locked-in-a-cage-released-to-the-world-how-the-mathieu-teisseire-flavour-masters-vietnam-2024-was-won/" },
-            { label: "Flavour Masters 2025 — VnExpress", url: "https://vnexpress.net/cuoc-thi-pha-che-mathieu-teisseire-viet-nam-co-quan-quan-moi-4919678.html" },
-            { label: "Flavour Masters 2025 — HTV", url: "https://htv.vn/flavour-masters-2025-ton-vinh-tai-nang-pha-che-sang-tao-222250723154051994.htm" },
-            { label: "Flavour Masters 2025 — Thanh Niên", url: "https://thanhnien.vn/kham-pha-cong-thuc-cocktail-bun-bo-hue-cua-bartender-viet-lot-top-2-the-gioi-185251022134724645.htm" }
+            { label: "Flavour Masters 2025 — VnExpress", url: "https://vnexpress.net/cuoc-thi-pha-che-mathieu-teisseire-viet-nam-co-quan-quan-moi-4919678.html" }
           ]
         },
         {
           id: "annam-2",
-          title: "Perrier / Maison Perrier",
-          description: "Managed new product launches including annual Limited Edition releases and the Maison Perrier launch. Coordinated collaborations with key outlets through guest shifts, sponsored events, and private dinners.",
+          brand: "Mathieu Teisseire",
+          title: "Masterclass & Guest Shift",
+          description: "Curated premium educational and networking experiences for the HCMC bartender community, elevating brand equity through international expert collaborations.",
           highlights: [
-            "New product launches — Limited Edition annually",
-            "Launch Maison Perrier (Sep 2025)",
-            "Collaborations with key outlets (guest shift / sponsored event / private dinner)"
+            "Community Building: Managing a network of 100+ top-tier mixologists",
+            "Event Production: End-to-end execution of boutique bar takeovers and technical workshops",
+            "Local Market Adaptation: Tailoring global brand guidelines to Vietnamese market tastes"
           ],
-          metrics: "Annual launches",
-          images: ["/Anam 2.jpg"],
+          metrics: "5+/month • 100% Reach",
+          images: [
+            "/mathieu-teisseire/masterclass-guestshift/MG 1.jpg",
+            "/mathieu-teisseire/masterclass-guestshift/MG 2.jpg",
+            "/mathieu-teisseire/masterclass-guestshift/MG 3.jpg",
+            "/mathieu-teisseire/masterclass-guestshift/MG 4.jpg",
+            "/mathieu-teisseire/masterclass-guestshift/MG 5.jpg"
+          ],
           links: []
         },
         {
           id: "annam-3",
-          title: "Evian — Premium Brand Activation",
-          description: "Coordinated premium brand activation at high-end restaurants, including collaborations with Michelin Dinner and Wine Dinner events.",
+          brand: "Perrier",
+          title: "Maison Perrier Launch (Sep 2025)",
+          description: "Led the grand debut of Maison Perrier in Vietnam, positioning the brand as the ultimate premium mixer through strategic outlet collaborations and media events.",
           highlights: [
-            "Michelin Dinner / Wine Dinner collaborations",
-            "Premium brand activation at high-end restaurants"
+            "Go-To-Market Strategy: Defined launch milestones and target distribution channels",
+            "HORECA Collaborations: Partnered with Michelin-starred venues for exclusive pairings",
+            "Influencer Strategy: Managed VIP guest lists and celebrity brand advocates"
           ],
-          metrics: "Premium activations",
-          images: ["/Anam 3.jpg"],
+          metrics: "National Product Launch",
+          images: [
+            "/perrier/perrier-launching/Perrier Launching 1.jpg",
+            "/perrier/perrier-launching/Perrier Launching 2.jpg",
+            "/perrier/perrier-launching/Perrier Launching 3.jpg",
+            "/perrier/perrier-launching/Perrier Launching 4.jpg"
+          ],
           links: []
         },
         {
           id: "annam-4",
-          title: "Launching Perrier + Starck Event",
-          description: "Organized and executed the Perrier + Starck product launch event, managing all logistics, venue coordination, and guest experience.",
+          brand: "Perrier",
+          title: "Perrier + Starck Limited Edition",
+          description: "Managed the prestigious Philippe Starck collaboration, focusing on high-end brand storytelling and art-driven event activations.",
           highlights: [
-            "Product launch event",
-            "50+ attendees",
-            "Venue coordination & guest experience management"
+            "Art-Centric Marketing: Linked product design with luxury lifestyle narratives",
+            "Event Scenography: Coordinated with creative agencies for Starck-inspired event themes",
+            "OOH Campaigns: Deployed eye-catching mass display brand assets"
           ],
-          metrics: "50+ attendees",
-          images: ["/Anam 1.jpg"],
+          metrics: "Limited Design Release",
+          images: [
+            "/perrier/starck-launching/Starck Launching 1 .jpg",
+            "/perrier/starck-launching/Starck Launching 3.jpg",
+            "/perrier/starck-launching/Stark Launching 2.jpg"
+          ],
           links: []
         },
         {
           id: "annam-5",
-          title: "Content Creation",
-          description: "Created marketing content for Annam Professional across various channels, including social media posts, brand collateral, and promotional materials.",
+          brand: "Evian",
+          title: "Evian — Premium Brand Activation",
+          description: "Strengthened Evian's position in the luxury segment through high-stakes partnerships with Michelin Guide and exclusive Wine Dinner circuits.",
           highlights: [
-            "Multi-channel content creation",
-            "Social media posts & brand collateral",
-            "Promotional materials design"
+            "Michelin Partnership Management: Executed brand presence during Michelin award dinners",
+            "Luxury Pairings: Curated water menus for boutique wine and fine-dining experiences",
+            "Brand Equity Retention: Maintained consistent high-end visibility at 'top of table' events"
           ],
-          metrics: "Ongoing",
-          images: ["/Anam 2.jpg"],
+          metrics: "Michelin Dinner Exclusive",
+          images: [
+            "/evian/Evian.jpg",
+            "/evian/Evian 2.jpg",
+            "/evian/Evian 3.jpg"
+          ],
           links: []
         },
         {
           id: "annam-6",
-          title: "Video Editing",
-          description: "Produced and edited video content for marketing campaigns, event recaps, and social media engagement across Annam Professional's brand portfolio.",
+          brand: "Video & Content Creation",
+          title: "Content Production & Community Management",
+          description: "Driving digital engagement through dynamic video storytelling and strategic community management across Annam Professional's flagship channels.",
           highlights: [
-            "Campaign videos & event recaps",
-            "Social media video content",
-            "Brand portfolio coverage"
+            "Content Strategy: Developing monthly content calendars for B2B and consumer audiences",
+            "Multimedia Production: Short-form video editing (CapCut/Adobe Suite) for TikTok and Reels",
+            "Community Growth: Managing three major brand communities with high response rates"
           ],
-          metrics: "Ongoing",
-          images: ["/Anam 3.jpg"],
-          links: []
+          metrics: "3 Channels • 10k+ Reach",
+          images: [
+            "/content-creation/Video and content creation.jpg",
+            "/content-creation/Video and content creation 1.jpg",
+            "/content-creation/Video and content creation 2.jpg"
+          ],
+          links: [
+            { label: "Annam Group Mix Legend", url: "https://www.facebook.com/annamgroup.mixlegend" },
+            { label: "Annam Group Foodservice", url: "https://www.facebook.com/annamgroupfoodservice" },
+            { label: "Mathieu Teisseire Vietnam", url: "https://www.facebook.com/mathieuteisseirevietnam" }
+          ]
         }
       ]
     },
@@ -131,7 +168,11 @@ export const portfolioData = {
             "Hosted tech discussion room (Ballroom 3)"
           ],
           metrics: "500+ attendees • 1,000+ registrations",
-          images: ["/alibaba 1.jpg", "/alibaba 2.jpg", "/alibaba 3.jpg"],
+          images: [
+            "/alibaba/alibaba 1.jpg",
+            "/alibaba/alibaba 2.jpg",
+            "/alibaba/alibaba 3.jpg"
+          ],
           links: [
             { label: "Cloud Day 2023 Photos", url: "https://www.facebook.com/media/set/?set=a.288718183903210&type=3" }
           ]
@@ -148,7 +189,10 @@ export const portfolioData = {
             "Customer data collection & management"
           ],
           metrics: "70+ attendees per session • Monthly",
-          images: ["/alibaba 1.jpg"],
+          images: [
+            "/alibaba/alibaba 2.jpg",
+            "/alibaba/alibaba 1.jpg"
+          ],
           links: []
         }
       ]
@@ -174,7 +218,10 @@ export const portfolioData = {
             "Customer follow-ups & concern resolution"
           ],
           metrics: "100+ stores/year • 2020–2023",
-          images: [],
+          images: [
+            "/hai-anh/Hai Anh 1.png",
+            "/hai-anh/Hai Anh 2.png"
+          ],
           links: []
         },
         {
@@ -188,7 +235,10 @@ export const portfolioData = {
             "Partner coordination for hanging plans"
           ],
           metrics: "950+ stores • 6 kiosks • 2020–2021",
-          images: [],
+          images: [
+            "/hai-anh/Hai Anh 2.png",
+            "/hai-anh/Hai Anh 3.png"
+          ],
           links: []
         },
         {
@@ -202,7 +252,10 @@ export const portfolioData = {
             "Client material finalization"
           ],
           metrics: "300+ banners • 100+ standees • 2020",
-          images: [],
+          images: [
+            "/hai-anh/Hai Anh 3.png",
+            "/hai-anh/Hai Anh 4.png"
+          ],
           links: []
         },
         {
@@ -216,7 +269,10 @@ export const portfolioData = {
             "Client engagement & construction coordination"
           ],
           metrics: "50+ stores/year • 2020–2022",
-          images: [],
+          images: [
+            "/hai-anh/Hai Anh 4.png",
+            "/hai-anh/Hai Anh 1.png"
+          ],
           links: []
         },
         {
@@ -229,7 +285,12 @@ export const portfolioData = {
             "E-commerce platform operations"
           ],
           metrics: "Ongoing during tenure",
-          images: [],
+          images: [
+            "/hai-anh/Hai Anh 1.png",
+            "/hai-anh/Hai Anh 2.png",
+            "/hai-anh/Hai Anh 3.png",
+            "/hai-anh/Hai Anh 4.png"
+          ],
           links: []
         }
       ]
